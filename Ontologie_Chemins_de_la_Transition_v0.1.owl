@@ -17,6 +17,10 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
 #    Object Properties
 #################################################################
 
+###  http://virtual-assembly.org/ontologies/cdlt#OfferAndRequestRessourceProperty
+:OfferAndRequestRessourceProperty rdf:type owl:ObjectProperty .
+
+
 ###  http://virtual-assembly.org/ontologies/cdlt#courseOn
 :courseOn rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#basedOn> ;
@@ -48,12 +52,16 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
                rdfs:range :CourseType .
 
 
-###  http://virtual-assembly.org/ontologies/cdlt#hasLearner
-:hasLearner rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#involves> ;
-            owl:inverseOf :learnerOn ;
-            rdfs:domain :Course ;
-            rdfs:range <http://virtual-assembly.org/ontologies/pair#Actor> .
+###  http://virtual-assembly.org/ontologies/cdlt#hasHostingOfferOrRequestType
+:hasHostingOfferOrRequestType rdf:type owl:ObjectProperty ;
+                              rdfs:subPropertyOf :hasOfferAndRequestType ;
+                              owl:inverseOf :typeOfHostingOfferOrRequest ;
+                              rdfs:domain [ rdf:type owl:Class ;
+                                            owl:unionOf ( :HostingOffer
+                                                          :HostingRequest
+                                                        )
+                                          ] ;
+                              rdfs:range :HostingOfferOrRequestType .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#hasMentor
@@ -62,6 +70,14 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
            owl:inverseOf :mentorOn ;
            rdfs:domain :Course ;
            rdfs:range <http://virtual-assembly.org/ontologies/pair#Actor> .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#hasOfferAndRequestType
+:hasOfferAndRequestType rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#hasType> ;
+                        owl:inverseOf :typeOfOfferAndRequest ;
+                        rdfs:domain :OfferAndRequest ;
+                        rdfs:range :OfferAndRequestType .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#hasPathStatus
@@ -80,6 +96,19 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
              rdfs:range :CourseType .
 
 
+###  http://virtual-assembly.org/ontologies/cdlt#hasSkillOfferOrRequestType
+:hasSkillOfferOrRequestType rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf :hasOfferAndRequestType ;
+                            owl:inverseOf :typeOfSkillOfferOrRequest ;
+                            rdfs:domain [ rdf:type owl:Class ;
+                                          owl:unionOf ( :SkillOffer
+                                                        :SkillRequest
+                                                        :TrainingRequest
+                                                      )
+                                        ] ;
+                            rdfs:range :SkillOfferOrRequestType .
+
+
 ###  http://virtual-assembly.org/ontologies/cdlt#hasTransportationType
 :hasTransportationType rdf:type owl:ObjectProperty ;
                        rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#hasType> ;
@@ -87,11 +116,12 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
                                    :Path .
 
 
-###  http://virtual-assembly.org/ontologies/cdlt#learnerOn
-:learnerOn rdf:type owl:ObjectProperty ;
-           rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#involvedIn> ;
-           rdfs:domain <http://virtual-assembly.org/ontologies/pair#Actor> ;
-           rdfs:range :Course .
+###  http://virtual-assembly.org/ontologies/cdlt#hasTraveller
+:hasTraveller rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#involves> ;
+              owl:inverseOf :travellerOn ;
+              rdfs:domain :Course ;
+              rdfs:range <http://virtual-assembly.org/ontologies/pair#Actor> .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#mentorOn
@@ -99,6 +129,11 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
           rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#involvedIn> ;
           rdfs:domain <http://virtual-assembly.org/ontologies/pair#Actor> ;
           rdfs:range :Course .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#needsSkill
+:needsSkill rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#needs> .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#organizedBy
@@ -158,9 +193,35 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
                                  :Path .
 
 
+###  http://virtual-assembly.org/ontologies/cdlt#travellerOn
+:travellerOn rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#involvedIn> ;
+             rdfs:domain <http://virtual-assembly.org/ontologies/pair#Actor> ;
+             rdfs:range :Course .
+
+
 ###  http://virtual-assembly.org/ontologies/cdlt#typeOfCourse
 :typeOfCourse rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#typeOfSubject> .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#typeOfHostingOfferOrRequest
+:typeOfHostingOfferOrRequest rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf :typeOfOfferAndRequest ;
+                             rdfs:domain :HostingOfferOrRequestType ;
+                             rdfs:range [ rdf:type owl:Class ;
+                                          owl:unionOf ( :HostingOffer
+                                                        :HostingRequest
+                                                      )
+                                        ] .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#typeOfOfferAndRequest
+:typeOfOfferAndRequest rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#typeOf> ;
+                       rdfs:domain :OfferAndRequestType ;
+                       rdfs:range :OfferAndRequest ;
+                       rdfs:comment "Type d'offre ou de demande"@fr .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#typeOfPath
@@ -168,8 +229,28 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
             rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#typeOfSubject> .
 
 
+###  http://virtual-assembly.org/ontologies/cdlt#typeOfSkillOfferOrRequest
+:typeOfSkillOfferOrRequest rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf :typeOfOfferAndRequest ;
+                           rdfs:domain :SkillOfferOrRequestType ;
+                           rdfs:range [ rdf:type owl:Class ;
+                                        owl:unionOf ( :SkillOffer
+                                                      :SkillRequest
+                                                      :TrainingRequest
+                                                    )
+                                      ] .
+
+
 ###  http://virtual-assembly.org/ontologies/pair#about
 <http://virtual-assembly.org/ontologies/pair#about> rdfs:domain <http://virtual-assembly.org/ontologies/pair#Event> .
+
+
+###  http://virtual-assembly.org/ontologies/pair#hasType
+<http://virtual-assembly.org/ontologies/pair#hasType> rdfs:domain <http://virtual-assembly.org/ontologies/pair#Subject> .
+
+
+###  http://virtual-assembly.org/ontologies/pair#typeOf
+<http://virtual-assembly.org/ontologies/pair#typeOf> rdfs:range <http://virtual-assembly.org/ontologies/pair#Subject> .
 
 
 #################################################################
@@ -183,20 +264,66 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
             rdfs:range xsd:string .
 
 
+###  http://virtual-assembly.org/ontologies/cdlt#asAHostIntentions
+:asAHostIntentions rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf :intentions .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#asAMentorIntentions
+:asAMentorIntentions rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf :intentions .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#asATravelerIntentions
+:asATravelerIntentions rdf:type owl:DatatypeProperty ;
+                       rdfs:subPropertyOf :intentions .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#asAnOrganiserIntentions
+:asAnOrganiserIntentions rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf :intentions .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#attendees
+:attendees rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf :cdltDataProperty ;
+           rdfs:domain [ rdf:type owl:Class ;
+                         owl:unionOf ( <http://virtual-assembly.org/ontologies/pair#Event>
+                                       <http://virtual-assembly.org/ontologies/pair#Place>
+                                     )
+                       ] .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#attendeesMax
+:attendeesMax rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf :attendees .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#attendeesMin
+:attendeesMin rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf :attendees .
+
+
 ###  http://virtual-assembly.org/ontologies/cdlt#beds
 :beds rdf:type owl:DatatypeProperty ;
       rdfs:subPropertyOf :cdltDataProperty ;
-      rdfs:domain :Hosting .
+      rdfs:domain :HostingRequest .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#campingPlaces
 :campingPlaces rdf:type owl:DatatypeProperty ;
                rdfs:subPropertyOf :cdltDataProperty ;
-               rdfs:domain :Hosting .
+               rdfs:domain :HostingRequest .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#cdltDataProperty
 :cdltDataProperty rdf:type owl:DatatypeProperty .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#discountedPrice
+:discountedPrice rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf :price ;
+                 rdfs:label "Prix réduit"@fr .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#economicalConditions
@@ -206,6 +333,14 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
                                   <http://virtual-assembly.org/ontologies/pair#Event> .
 
 
+###  http://virtual-assembly.org/ontologies/cdlt#financialSupport
+:financialSupport rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf :cdltDataProperty ;
+                  rdfs:domain <http://virtual-assembly.org/ontologies/pair#Event> ;
+                  rdfs:label "Aide financière"@fr ,
+                             "Eligibilité CPF"@fr .
+
+
 ###  http://virtual-assembly.org/ontologies/cdlt#forWhom
 :forWhom rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf :cdltDataProperty ;
@@ -213,10 +348,29 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
                      :Path .
 
 
+###  http://virtual-assembly.org/ontologies/cdlt#freePrice
+:freePrice rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf :price ;
+           rdfs:comment "Il faudra sans doute un meilleur terme pour l'URI et la traduction anglaise : Free signifie gratuit en anglais ..."@fr ;
+           rdfs:label "Prix libre"@fr .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#host
+:host rdf:type owl:DatatypeProperty ;
+      rdfs:subPropertyOf :cdltDataProperty ;
+      rdfs:domain <http://virtual-assembly.org/ontologies/pair#Place> ;
+      rdfs:label "Hôte"@fr .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#intentions
+:intentions rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf :cdltDataProperty .
+
+
 ###  http://virtual-assembly.org/ontologies/cdlt#kitchenAcces
 :kitchenAcces rdf:type owl:DatatypeProperty ;
               rdfs:subPropertyOf :cdltDataProperty ;
-              rdfs:domain :Hosting .
+              rdfs:domain :HostingRequest .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#learningObjectives
@@ -227,10 +381,38 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
                                 <http://virtual-assembly.org/ontologies/pair#Event> .
 
 
-###  http://virtual-assembly.org/ontologies/cdlt#magementTool
-:magementTool rdf:type owl:DatatypeProperty ;
-              rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#webPage> ;
-              rdfs:domain <http://virtual-assembly.org/ontologies/pair#Organization> .
+###  http://virtual-assembly.org/ontologies/cdlt#managementTool
+:managementTool rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#webPage> ;
+                rdfs:domain <http://virtual-assembly.org/ontologies/pair#Organization> .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#mentor
+:mentor rdf:type owl:DatatypeProperty ;
+        rdfs:subPropertyOf :cdltDataProperty ;
+        rdfs:domain [ rdf:type owl:Class ;
+                      owl:unionOf ( :Course
+                                    <http://virtual-assembly.org/ontologies/pair#Event>
+                                  )
+                    ] ;
+        rdfs:label "Mentor"@fr .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#openAnyTime
+:openAnyTime rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf :cdltDataProperty ;
+             rdfs:label "Accueil permament ?"@fr .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#organiser
+:organiser rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf :cdltDataProperty ;
+           rdfs:domain [ rdf:type owl:Class ;
+                         owl:unionOf ( :Course
+                                       <http://virtual-assembly.org/ontologies/pair#Event>
+                                     )
+                       ] ;
+           rdfs:label "Organisateur"@fr .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#practicalConditions
@@ -248,10 +430,20 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
                            <http://virtual-assembly.org/ontologies/pair#Event> .
 
 
+###  http://virtual-assembly.org/ontologies/cdlt#price
+:price rdf:type owl:DatatypeProperty ;
+       rdfs:subPropertyOf :cdltDataProperty ;
+       rdfs:domain [ rdf:type owl:Class ;
+                     owl:unionOf ( <http://virtual-assembly.org/ontologies/pair#Event>
+                                   <http://virtual-assembly.org/ontologies/pair#Place>
+                                 )
+                   ] .
+
+
 ###  http://virtual-assembly.org/ontologies/cdlt#priceRange
 :priceRange rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf :cdltDataProperty ;
-            rdfs:domain :Hosting .
+            rdfs:domain :HostingRequest .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#professionalPerspectives
@@ -272,6 +464,11 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
 #    Classes
 #################################################################
 
+###  http://virtual-assembly.org/ontologies/cdlt#ChallengeType
+:ChallengeType rdf:type owl:Class ;
+               rdfs:subClassOf :IntentionType .
+
+
 ###  http://virtual-assembly.org/ontologies/cdlt#Course
 :Course rdf:type owl:Class ;
         rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Event> .
@@ -287,21 +484,87 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
             rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#EventType> .
 
 
-###  http://virtual-assembly.org/ontologies/cdlt#Hosting
-:Hosting rdf:type owl:Class ;
-         rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Resource> .
+###  http://virtual-assembly.org/ontologies/cdlt#FinalityType
+:FinalityType rdf:type owl:Class ;
+              rdfs:subClassOf :IntentionType .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#HostingOffer
+:HostingOffer rdf:type owl:Class ;
+              rdfs:subClassOf :Offer .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#HostingOfferOrRequestType
+:HostingOfferOrRequestType rdf:type owl:Class ;
+                           rdfs:subClassOf :OfferAndRequestType .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#HostingRequest
+:HostingRequest rdf:type owl:Class ;
+                rdfs:subClassOf :Request .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#IntentionType
+:IntentionType rdf:type owl:Class ;
+               rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Type> ;
+               rdfs:label "Type d'intention"@fr .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#MeanType
+:MeanType rdf:type owl:Class ;
+          rdfs:subClassOf :IntentionType .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#News
+:News rdf:type owl:Class ;
+      rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Document> .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#Offer
+:Offer rdf:type owl:Class ;
+       rdfs:subClassOf :OfferAndRequest .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#OfferAndRequest
+:OfferAndRequest rdf:type owl:Class ;
+                 rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Subject> .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#OfferAndRequestType
+:OfferAndRequestType rdf:type owl:Class ;
+                     rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Type> ;
+                     rdfs:comment """Testing : 
+On pourrait l'appeler Type de contrat aussi .. 
+
+
+L'idée est la suivante : 
+
+On a : 
+- Des Offres et des Demandes (de compétences par exemple). 
+- Des Types d'offre ou de demande (CDD - CDI - Stage Apprentissage - Service Civique - Bénévolat ...) - Le type est le même pour les Offres et les Demandes.
+- Des concepts de compétences, classées sous ressource (pose d'enduits terre, fabrication de panneaux solaires thermique ..)
+
+Si quelqu'un renseigne : 
+J'offre ma compétence en pose d'enduit terre sous le contrat de type CDD ou CDI 
+
+Et que quelqu'un d'autre renseigne : 
+Je demande une compétence en pose d'enduit terre sous un contrat de type CDD ou CDI 
+
+Alors, on peut identifier un match : Entre 2 agents, qui font une offre et une demande de même type, autour d'un même compétence."""@fr ;
+                     rdfs:label "Type d'offre ou de demande"@fr .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#Path
 :Path rdf:type owl:Class ;
-      rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Idea> ;
+      rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Subject> ,
+                      <http://virtual-assembly.org/ontologies/pair#Topic> ;
       rdfs:comment ""@fr ;
-      rdfs:label "Parcours"@fr .
+      rdfs:label "Chemin"@fr .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#PathStatus
 :PathStatus rdf:type owl:Class ;
-            rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#IdeaStatus> .
+            rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Status> .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#PathType
@@ -309,9 +572,45 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
           rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#IdeaType> .
 
 
+###  http://virtual-assembly.org/ontologies/cdlt#Request
+:Request rdf:type owl:Class ;
+         rdfs:subClassOf :OfferAndRequest .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#SkillOffer
+:SkillOffer rdf:type owl:Class ;
+            rdfs:subClassOf :Offer ;
+            rdfs:label "Offre de compétence"@fr .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#SkillOfferOrRequestType
+:SkillOfferOrRequestType rdf:type owl:Class ;
+                         rdfs:subClassOf :OfferAndRequestType .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#SkillRequest
+:SkillRequest rdf:type owl:Class ;
+              rdfs:subClassOf :Request ;
+              rdfs:comment "dans le cadre de … Projets / lieux / événements, organisations …"@fr ;
+              rdfs:label "Appel à compétence"@fr .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#Story
+:Story rdf:type owl:Class ;
+       rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Document> ;
+       rdfs:label "Récit"@fr ,
+                  "Témoignage"@fr .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#TrainingRequest
+:TrainingRequest rdf:type owl:Class ;
+                 rdfs:subClassOf :Request ;
+                 rdfs:label "Demande de formation"@fr .
+
+
 ###  http://virtual-assembly.org/ontologies/cdlt#Transportation
 :Transportation rdf:type owl:Class ;
                 rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Type> .
 
 
-###  Generated by the OWL API (version 4.5.6.2018-09-06T00:27:41Z) https://github.com/owlcs/owlapi
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
