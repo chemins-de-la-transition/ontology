@@ -96,6 +96,14 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
              rdfs:range :CourseType .
 
 
+###  http://virtual-assembly.org/ontologies/cdlt#hasRegion
+:hasRegion rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#hasLocation> ;
+           owl:inverseOf :regionOf ;
+           rdfs:domain <http://virtual-assembly.org/ontologies/pair#PAIR> ;
+           rdfs:range <http://virtual-assembly.org/ontologies/pair#Place> .
+
+
 ###  http://virtual-assembly.org/ontologies/cdlt#hasSkillOfferOrRequestType
 :hasSkillOfferOrRequestType rdf:type owl:ObjectProperty ;
                             rdfs:subPropertyOf :hasOfferAndRequestType ;
@@ -164,6 +172,13 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
           rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#brainstorms> ;
           rdfs:domain <http://virtual-assembly.org/ontologies/pair#Actor> ;
           rdfs:range :Path .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#regionOf
+:regionOf rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#locationOf> ;
+          rdfs:domain <http://virtual-assembly.org/ontologies/pair#Place> ;
+          rdfs:range <http://virtual-assembly.org/ontologies/pair#PAIR> .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#statusOf
