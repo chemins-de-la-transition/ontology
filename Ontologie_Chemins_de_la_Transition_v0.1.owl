@@ -29,6 +29,14 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
           rdfs:range :Path .
 
 
+###  http://virtual-assembly.org/ontologies/cdlt#eventOn
+:eventOn rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#interSubjectProperty> ;
+         owl:inverseOf :hasEvent ;
+         rdfs:domain <http://virtual-assembly.org/ontologies/pair#Event> ;
+         rdfs:range :Path .
+
+
 ###  http://virtual-assembly.org/ontologies/cdlt#hasCourse
 :hasCourse rdf:type owl:ObjectProperty ;
            rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#concretizedBy> ;
@@ -50,6 +58,13 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
                owl:inverseOf :typeOfCourse ;
                rdfs:domain :Course ;
                rdfs:range :CourseType .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#hasEvent
+:hasEvent rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#interSubjectProperty> ;
+          rdfs:domain :Path ;
+          rdfs:range <http://virtual-assembly.org/ontologies/pair#Event> .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#hasHostingOfferOrRequestType
@@ -94,6 +109,14 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
              owl:inverseOf :typeOfPath ;
              rdfs:domain :Path ;
              rdfs:range :CourseType .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#hasPlace
+:hasPlace rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#interSubjectProperty> ;
+          owl:inverseOf :placeOn ;
+          rdfs:domain :Path ;
+          rdfs:range <http://virtual-assembly.org/ontologies/pair#Place> .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#hasRegion
@@ -157,6 +180,13 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
            rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#involves> ;
            rdfs:domain <http://virtual-assembly.org/ontologies/pair#Actor> ;
            rdfs:range :Course .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#placeOn
+:placeOn rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#interSubjectProperty> ;
+         rdfs:domain <http://virtual-assembly.org/ontologies/pair#Place> ;
+         rdfs:range :Path .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#proposedBy
@@ -272,6 +302,17 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
 #    Data properties
 #################################################################
 
+###  http://virtual-assembly.org/ontologies/cdlt#accessibility
+:accessibility rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf :full ;
+               rdfs:domain [ rdf:type owl:Class ;
+                             owl:unionOf ( :Course
+                                           <http://virtual-assembly.org/ontologies/pair#Event>
+                                           <http://virtual-assembly.org/ontologies/pair#Place>
+                                         )
+                           ] .
+
+
 ###  http://virtual-assembly.org/ontologies/cdlt#activities
 :activities rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf :cdltDataProperty ;
@@ -348,6 +389,17 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
                                   <http://virtual-assembly.org/ontologies/pair#Event> .
 
 
+###  http://virtual-assembly.org/ontologies/cdlt#evaluationMethod
+:evaluationMethod rdf:type owl:DatatypeProperty ;
+                  rdfs:domain [ rdf:type owl:Class ;
+                                owl:unionOf ( :Course
+                                              <http://virtual-assembly.org/ontologies/pair#Event>
+                                            )
+                              ] ;
+                  rdfs:comment "Pour les événements de type formation certifiée s'incrivant dans les dispositifs CPF, Qualiopi"@fr ;
+                  rdfs:label "Modalités d'évaluation"@fr .
+
+
 ###  http://virtual-assembly.org/ontologies/cdlt#financialSupport
 :financialSupport rdf:type owl:DatatypeProperty ;
                   rdfs:subPropertyOf :cdltDataProperty ;
@@ -368,6 +420,17 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
            rdfs:subPropertyOf :price ;
            rdfs:comment "Il faudra sans doute un meilleur terme pour l'URI et la traduction anglaise : Free signifie gratuit en anglais ..."@fr ;
            rdfs:label "Prix libre"@fr .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#full
+:full rdf:type owl:DatatypeProperty ;
+      rdfs:domain [ rdf:type owl:Class ;
+                    owl:unionOf ( :Course
+                                  <http://virtual-assembly.org/ontologies/pair#Event>
+                                )
+                  ] ;
+      rdfs:range xsd:boolean ;
+      rdfs:label "Complet"@fr .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#host
@@ -430,6 +493,16 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
            rdfs:label "Organisateur"@fr .
 
 
+###  http://virtual-assembly.org/ontologies/cdlt#pedagogicalMeans
+:pedagogicalMeans rdf:type owl:DatatypeProperty ;
+                  rdfs:domain [ rdf:type owl:Class ;
+                                owl:unionOf ( :Course
+                                              <http://virtual-assembly.org/ontologies/pair#Event>
+                                              <http://virtual-assembly.org/ontologies/pair#Place>
+                                            )
+                              ] .
+
+
 ###  http://virtual-assembly.org/ontologies/cdlt#practicalConditions
 :practicalConditions rdf:type owl:DatatypeProperty ;
                      rdfs:subPropertyOf :cdltDataProperty ;
@@ -468,11 +541,30 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
                                       :Path .
 
 
+###  http://virtual-assembly.org/ontologies/cdlt#referenceNumber
+:referenceNumber rdf:type owl:DatatypeProperty ;
+                 rdfs:domain [ rdf:type owl:Class ;
+                               owl:unionOf ( :Course
+                                             <http://virtual-assembly.org/ontologies/pair#Event>
+                                           )
+                             ] ;
+                 rdfs:range xsd:integer .
+
+
 ###  http://virtual-assembly.org/ontologies/cdlt#schedule
 :schedule rdf:type owl:DatatypeProperty ;
           rdfs:subPropertyOf :cdltDataProperty ;
           rdfs:domain <http://virtual-assembly.org/ontologies/pair#Event> ;
           rdfs:range xsd:string .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#targetAudience
+:targetAudience rdf:type owl:DatatypeProperty ;
+                rdfs:domain [ rdf:type owl:Class ;
+                              owl:unionOf ( :Course
+                                            <http://virtual-assembly.org/ontologies/pair#Event>
+                                          )
+                            ] .
 
 
 #################################################################
