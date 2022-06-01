@@ -56,7 +56,8 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
 :hasCourseType rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#hasSubjectType> ;
                owl:inverseOf :typeOfCourse ;
-               rdfs:domain :Course ;
+               rdfs:domain :Course ,
+                           <http://virtual-assembly.org/ontologies/pair#Organization> ;
                rdfs:range :CourseType .
 
 
