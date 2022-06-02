@@ -516,19 +516,6 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
                               ] .
 
 
-###  http://virtual-assembly.org/ontologies/cdlt#personalizedJotformLink
-:personalizedJotformLink rdf:type owl:DatatypeProperty ;
-                         rdfs:subPropertyOf :jotformLink ;
-                         rdfs:domain [ rdf:type owl:Class ;
-                                       owl:unionOf ( :Course
-                                                     :Path
-                                                     <http://virtual-assembly.org/ontologies/pair#Event>
-                                                     <http://virtual-assembly.org/ontologies/pair#Place>
-                                                   )
-                                     ] ;
-                         rdfs:range xsd:boolean .
-
-
 ###  http://virtual-assembly.org/ontologies/cdlt#practicalConditions
 :practicalConditions rdf:type owl:DatatypeProperty ;
                      rdfs:subPropertyOf :cdltDataProperty ;
@@ -575,6 +562,29 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
                                            )
                              ] ;
                  rdfs:range xsd:integer .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#registrationLink
+:registrationLink rdf:type owl:DatatypeProperty ;
+                  rdfs:domain [ rdf:type owl:Class ;
+                                owl:unionOf ( :Course
+                                              :Path
+                                              <http://virtual-assembly.org/ontologies/pair#Event>
+                                              <http://virtual-assembly.org/ontologies/pair#Place>
+                                            )
+                              ] .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#registrationOption
+:registrationOption rdf:type owl:DatatypeProperty ;
+                    rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( :Course
+                                                :Path
+                                                <http://virtual-assembly.org/ontologies/pair#Event>
+                                                <http://virtual-assembly.org/ontologies/pair#Place>
+                                              )
+                                ] ;
+                    rdfs:range xsd:integer .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#schedule
