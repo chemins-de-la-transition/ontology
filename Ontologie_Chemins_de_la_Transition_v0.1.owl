@@ -156,6 +156,15 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
               rdfs:range <http://virtual-assembly.org/ontologies/pair#Actor> .
 
 
+###  http://virtual-assembly.org/ontologies/cdlt#hostsOrganization
+:hostsOrganization rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#hosts> ,
+                                      <http://virtual-assembly.org/ontologies/pair#interSubjectProperty> ;
+                   owl:inverseOf :organizationHostedIn ;
+                   rdfs:domain <http://virtual-assembly.org/ontologies/pair#Place> ;
+                   rdfs:range <http://virtual-assembly.org/ontologies/pair#Organization> .
+
+
 ###  http://virtual-assembly.org/ontologies/cdlt#mentorOn
 :mentorOn rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#involvedIn> ;
@@ -166,6 +175,13 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
 ###  http://virtual-assembly.org/ontologies/cdlt#needsSkill
 :needsSkill rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#needs> .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#organizationHostedIn
+:organizationHostedIn rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#interSubjectProperty> ;
+                      rdfs:domain <http://virtual-assembly.org/ontologies/pair#Organization> ;
+                      rdfs:range <http://virtual-assembly.org/ontologies/pair#Place> .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#organizedBy
