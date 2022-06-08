@@ -120,6 +120,20 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
           rdfs:range <http://virtual-assembly.org/ontologies/pair#Place> .
 
 
+###  http://virtual-assembly.org/ontologies/cdlt#hasReferent
+:hasReferent rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#interSubjectProperty> ;
+             owl:inverseOf :isReferent ;
+             rdfs:domain [ rdf:type owl:Class ;
+                           owl:unionOf ( :Course
+                                         :Path
+                                         <http://virtual-assembly.org/ontologies/pair#Event>
+                                         <http://virtual-assembly.org/ontologies/pair#Place>
+                                       )
+                         ] ;
+             rdfs:range <http://virtual-assembly.org/ontologies/pair#Person> .
+
+
 ###  http://virtual-assembly.org/ontologies/cdlt#hasRegion
 :hasRegion rdf:type owl:ObjectProperty ;
            rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#hasLocation> ;
@@ -163,6 +177,19 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
                    owl:inverseOf :organizationHostedIn ;
                    rdfs:domain <http://virtual-assembly.org/ontologies/pair#Place> ;
                    rdfs:range <http://virtual-assembly.org/ontologies/pair#Organization> .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#isReferent
+:isReferent rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#interSubjectProperty> ;
+            rdfs:domain <http://virtual-assembly.org/ontologies/pair#Person> ;
+            rdfs:range [ rdf:type owl:Class ;
+                         owl:unionOf ( :Course
+                                       :Path
+                                       <http://virtual-assembly.org/ontologies/pair#Event>
+                                       <http://virtual-assembly.org/ontologies/pair#Place>
+                                     )
+                       ] .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#mentorOn
@@ -245,6 +272,17 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
               rdfs:subPropertyOf :statusOf ;
               rdfs:domain :PathStatus ;
               rdfs:range :Path .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#targetAudience
+:targetAudience rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#subjectConceptProperties> ;
+                rdfs:domain :TargetAudience ;
+                rdfs:range [ rdf:type owl:Class ;
+                             owl:unionOf ( :Course
+                                           <http://virtual-assembly.org/ontologies/pair#Event>
+                                         )
+                           ] .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#transportationTypeOf
@@ -610,15 +648,6 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
           rdfs:range xsd:string .
 
 
-###  http://virtual-assembly.org/ontologies/cdlt#targetAudience
-:targetAudience rdf:type owl:DatatypeProperty ;
-                rdfs:domain [ rdf:type owl:Class ;
-                              owl:unionOf ( :Course
-                                            <http://virtual-assembly.org/ontologies/pair#Event>
-                                          )
-                            ] .
-
-
 #################################################################
 #    Classes
 #################################################################
@@ -759,6 +788,11 @@ Alors, on peut identifier un match : Entre 2 agents, qui font une offre et une d
        rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Document> ;
        rdfs:label "Récit"@fr ,
                   "Témoignage"@fr .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#TargetAudience
+:TargetAudience rdf:type owl:Class ;
+                rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Concept> .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#TrainingRequest
