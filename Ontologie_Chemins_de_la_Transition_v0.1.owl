@@ -142,6 +142,16 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
            rdfs:range <http://virtual-assembly.org/ontologies/pair#Place> .
 
 
+###  http://virtual-assembly.org/ontologies/cdlt#hasRegistration
+:hasRegistration rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#interSubjectProperty> ;
+                 owl:inverseOf :registrationFor ;
+                 rdfs:domain :Course ,
+                             <http://virtual-assembly.org/ontologies/pair#Event> ,
+                             <http://virtual-assembly.org/ontologies/pair#Place> ;
+                 rdfs:range :Registration .
+
+
 ###  http://virtual-assembly.org/ontologies/cdlt#hasSkillOfferOrRequestType
 :hasSkillOfferOrRequestType rdf:type owl:ObjectProperty ;
                             rdfs:subPropertyOf :hasOfferAndRequestType ;
@@ -253,6 +263,30 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
           rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#locationOf> ;
           rdfs:domain <http://virtual-assembly.org/ontologies/pair#Place> ;
           rdfs:range <http://virtual-assembly.org/ontologies/pair#PAIR> .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#registeredFor
+:registeredFor rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#interSubjectProperty> ;
+               owl:inverseOf :registrant ;
+               rdfs:domain <http://virtual-assembly.org/ontologies/pair#Person> ;
+               rdfs:range :Registration .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#registrant
+:registrant rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#interSubjectProperty> ;
+            rdfs:domain :Registration ;
+            rdfs:range <http://virtual-assembly.org/ontologies/pair#Person> .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#registrationFor
+:registrationFor rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#interSubjectProperty> ;
+                 rdfs:domain :Registration ;
+                 rdfs:range :Course ,
+                            <http://virtual-assembly.org/ontologies/pair#Event> ,
+                            <http://virtual-assembly.org/ontologies/pair#Place> .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#statusOf
@@ -659,7 +693,8 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
 
 ###  http://virtual-assembly.org/ontologies/cdlt#Course
 :Course rdf:type owl:Class ;
-        rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Event> .
+        rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Event> ;
+        rdfs:label "Voyage"@fr .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#CourseStatus
@@ -758,6 +793,12 @@ Alors, on peut identifier un match : Entre 2 agents, qui font une offre et une d
 ###  http://virtual-assembly.org/ontologies/cdlt#PathType
 :PathType rdf:type owl:Class ;
           rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#IdeaType> .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#Registration
+:Registration rdf:type owl:Class ;
+              rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Subject> ;
+              rdfs:label "Inscription"@fr .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#Request
