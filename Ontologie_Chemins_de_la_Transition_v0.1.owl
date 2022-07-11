@@ -534,6 +534,12 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
             rdfs:subPropertyOf :cdltDataProperty .
 
 
+###  http://virtual-assembly.org/ontologies/cdlt#jobOpportunities
+:jobOpportunities rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf :cdltDataProperty ;
+                  rdfs:domain <http://virtual-assembly.org/ontologies/pair#Event> .
+
+
 ###  http://virtual-assembly.org/ontologies/cdlt#jotformLink
 :jotformLink rdf:type owl:DatatypeProperty ;
              rdfs:domain [ rdf:type owl:Class ;
