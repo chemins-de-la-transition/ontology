@@ -681,6 +681,13 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
                     rdfs:range xsd:integer .
 
 
+###  http://virtual-assembly.org/ontologies/cdlt#registrationOutsideCourse
+:registrationOutsideCourse rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf owl:topDataProperty ;
+                           rdfs:domain <http://virtual-assembly.org/ontologies/pair#Event> ;
+                           rdfs:range xsd:boolean .
+
+
 ###  http://virtual-assembly.org/ontologies/cdlt#schedule
 :schedule rdf:type owl:DatatypeProperty ;
           rdfs:subPropertyOf :cdltDataProperty ;
