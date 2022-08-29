@@ -648,6 +648,13 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
                                       :Path .
 
 
+###  http://virtual-assembly.org/ontologies/cdlt#publicPhone
+:publicPhone rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf owl:topDataProperty ;
+             rdfs:domain <http://virtual-assembly.org/ontologies/pair#Actor> ;
+             rdfs:range xsd:string .
+
+
 ###  http://virtual-assembly.org/ontologies/cdlt#referenceNumber
 :referenceNumber rdf:type owl:DatatypeProperty ;
                  rdfs:domain [ rdf:type owl:Class ;
