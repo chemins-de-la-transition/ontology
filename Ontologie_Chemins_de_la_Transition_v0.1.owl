@@ -80,6 +80,17 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
                               rdfs:range :HostingOfferOrRequestType .
 
 
+###  http://virtual-assembly.org/ontologies/cdlt#hasJobOpportunities
+:hasJobOpportunities rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#subjectConceptProperties> ;
+                     rdfs:domain :JobOpportunities ;
+                     rdfs:range [ rdf:type owl:Class ;
+                                  owl:unionOf ( :Course
+                                                <http://virtual-assembly.org/ontologies/pair#Event>
+                                              )
+                                ] .
+
+
 ###  http://virtual-assembly.org/ontologies/cdlt#hasMentor
 :hasMentor rdf:type owl:ObjectProperty ;
            rdfs:subPropertyOf <http://virtual-assembly.org/ontologies/pair#involves> ;
@@ -534,12 +545,6 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
             rdfs:subPropertyOf :cdltDataProperty .
 
 
-###  http://virtual-assembly.org/ontologies/cdlt#jobOpportunities
-:jobOpportunities rdf:type owl:DatatypeProperty ;
-                  rdfs:subPropertyOf :cdltDataProperty ;
-                  rdfs:domain <http://virtual-assembly.org/ontologies/pair#Event> .
-
-
 ###  http://virtual-assembly.org/ontologies/cdlt#jotformLink
 :jotformLink rdf:type owl:DatatypeProperty ;
              rdfs:domain [ rdf:type owl:Class ;
@@ -751,6 +756,11 @@ Basée sur l'ontologie PAIR, elle intègre les concepts et relations métiers sp
 :IntentionType rdf:type owl:Class ;
                rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Type> ;
                rdfs:label "Type d'intention"@fr .
+
+
+###  http://virtual-assembly.org/ontologies/cdlt#JobOpportunities
+:JobOpportunities rdf:type owl:Class ;
+                  rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Concept> .
 
 
 ###  http://virtual-assembly.org/ontologies/cdlt#MeanType
