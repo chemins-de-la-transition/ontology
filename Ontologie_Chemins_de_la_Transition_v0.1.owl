@@ -825,6 +825,11 @@ Alors, on peut identifier un match : Entre 2 agents, qui font une offre et une d
           rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#IdeaType> .
 
 
+###  http://virtual-assembly.org/ontologies/cdlt#PublicationStatus
+:PublicationStatus rdf:type owl:Class ;
+                   rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Status> .
+
+
 ###  http://virtual-assembly.org/ontologies/cdlt#Registration
 :Registration rdf:type owl:Class ;
               rdfs:subClassOf <http://virtual-assembly.org/ontologies/pair#Subject> ;
